@@ -16,68 +16,26 @@
 
 package com.depsystem.app.demos.web;
 
-import com.depsystem.app.loginServer.Login;
-import com.depsystem.app.loginServer.LoginServerImpl;
-import com.depsystem.app.systemServer.securityServer.securityVO.*;
-import com.depsystem.app.systemServer.util.RedisUtil;
-import com.depsystem.app.systemServer.util.ResponseResult;
-import com.wf.captcha.SpecCaptcha;
-import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
-
-import static com.depsystem.app.systemServer.util.ResponseResult.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- *
+ * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
  */
 @Controller
 public class BasicController {
 
-    @Resource
-    LoginServerImpl loginServer;
-    @Resource
-    RedisUtil redisUtil;
-
-    @RequestMapping("/api/login")
-    @ResponseBody
-    public ResponseResult<?> login(@RequestBody Login user){
-        Login login = loginServer.login(user.getName(), user.getPassword());
-        return ok(login);
-    }
-
-    /**
-     * CaptchaGenerateCreate
-     */
-    @RequestMapping(value = "/captcha",method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseResult<CaptchaVO> getCaptcha(){
-        SpecCaptcha captcha = new SpecCaptcha(200,100,5);
-        String code = captcha.text().toLowerCase();
-        String key = UUID.randomUUID().toString();
-        redisUtil.set(key,code,3);
-        CaptchaVO captchaVO = new CaptchaVO();
-        captchaVO.setId(key);
-        captchaVO.setBase64(captcha.toBase64());
-        return ok(captchaVO,"验证创建成功");
-    }
-
-    /**
-     * <a href="http://127.0.0.1:8080/hello?name=lisi">...</a>
-     */
+    // http://127.0.0.1:8080/hello?name=lisi
     @RequestMapping("/hello")
     @ResponseBody
     public String hello(@RequestParam(name = "name", defaultValue = "unknown user") String name) {
         return "Hello " + name;
     }
 
-    /**
-     * <a href="http://127.0.0.1:8080/user">...</a>
-     */
+    // http://127.0.0.1:8080/user
     @RequestMapping("/user")
     @ResponseBody
     public User user() {
@@ -87,18 +45,14 @@ public class BasicController {
         return user;
     }
 
-    /**
-     * <a href="http://127.0.0.1:8080/save_user?name=newName&age=11">...</a>
-     */
+    // http://127.0.0.1:8080/save_user?name=newName&age=11
     @RequestMapping("/save_user")
     @ResponseBody
     public String saveUser(User u) {
         return "user will save: name=" + u.getName() + ", age=" + u.getAge();
     }
 
-    /**
-     * <a href="http://127.0.0.1:8080/html">...</a>
-     */
+    // http://127.0.0.1:8080/html
     @RequestMapping("/html")
     public String html(){
         return "index.html";

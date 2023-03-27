@@ -41,7 +41,8 @@ export default {
         return {
             username: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            iphone: ''
         };
     },
     methods: {

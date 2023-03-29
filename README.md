@@ -10,3 +10,13 @@ node 16+ 版本
 安装好后，下载本仓库代码。
 
 [代码地址](http://120.24.203.75:3000/DepSystem/WebVue.git)
+
+接着运行
+
+```bash
+npm build
+```
+
+打包好后，将其打包好的文件放到Spring boot的static文件夹中。
+
+运行Spring boot项目即可。

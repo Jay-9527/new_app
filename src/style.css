@@ -184,3 +184,14 @@ button:focus-visible {
 #reg {
   margin-left: 24%;
 }
+
+/* 验证码样式 */
+
+.image {
+  margin: 2px 0;
+  display: flex;
+}
+
+#imginput {
+  margin: 0 12px;
+}

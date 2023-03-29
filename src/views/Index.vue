@@ -1,13 +1,13 @@
 <template>
     <div>
         <div>
-            
+
         </div>
         {{ name }}
     </div>
 </template>
 
-<script>
+<script >
 export default {
     name: 'App5Index',
 

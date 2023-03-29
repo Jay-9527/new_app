@@ -16,6 +16,11 @@
                                 <input type="password" required v-model="password" class="form-control"
                                     id="exampleInputPassword1" placeholder="请输入密码">
                             </div>
+                            <div class="image">
+                                <img :src="this.codeImage" @click="getCode" style="width: 130px; height: 39px;">
+                                <input type="text" id="imginput" style="width: 120px;" class="form-control"
+                                    placeholder="输入验证码" />
+                            </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">记住密码</label>
@@ -33,29 +38,52 @@
 </template>
 
 <script>
+import { createDOMCompilerError } from '@vue/compiler-dom'
+import { createApp } from 'vue'
+import request from "../utils/request"
+import qs from "qs"
+
 export default {
     data() {
         return {
             username: '',
-            password: ''
+            password: '',
+            codeImage: ''
         }
+    },
+    created() {
+        var img = this.$data.codeImage;
+        request.get('/captcha', { responseType: 'blob' }).then((response) => {
+            console.log(response.data)
+            this.codeImage = window.URL.createObjectURL(response.data)
+            console.log(this.codeImage)
+        })
     },
     methods: {
         login() {
-            // 发送 POST 请求
-            fetch('https://localhost:8080/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: this.username, password: this.password })
+            request.post('/login',
+                qs.stringify({
+                    name: this.$data.username,
+                    password: this.$data.password
+                }), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(resp => {
+                console.log(resp)
+                if (resp.status == 200) {
+                    this.$router.push({
+                        path: '/index'
+                    })
+                }
+            }).catch(error => console.log(error))
+        },
+        getCode() {
+            request.get('/captcha', { responseType: 'blob' }).then((response) => {
+                console.log(response.data)
+                this.codeImage = window.URL.createObjectURL(response.data)
+                console.log(this.codeImage)
             })
-                .then(response => response.json())
-                .then(data => {
-                    // 将 Token 存储在本地存储器中
-                    localStorage.setItem('token', data.token)
-                    // 跳转到个人资料页面
-                    this.$router.push('/index')
-                })
-                .catch(error => console.error(error))
         },
         toRegister() {
             // 跳转到注册页面

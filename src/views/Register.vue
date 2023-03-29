@@ -53,7 +53,7 @@ export default {
             if (!this.password.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)) {
                 return alert('密码必须至少包含字母和数字，并且至少为 8 位！')
             }
-            fetch('http://localhost:8080/api/register', {
+            fetch('http://localhost:8080/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username: this.username, password: this.password })

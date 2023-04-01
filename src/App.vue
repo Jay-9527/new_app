@@ -5,9 +5,8 @@ import Login from './views/Login.vue'
 
 <template>
   <!-- haeder -->
-  <h4></h4>
   <!-- content -->
-  <div class="container">
+  <div class="">
     <RouterView />
   </div>
   <!-- footer -->

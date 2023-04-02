@@ -5,7 +5,7 @@ import router from './router'
 import './scss/styles.scss'
 import "@popperjs/core"
 import "bootstrap"
-
+import './scss/global.scss'
 
 const app = createApp(App)
 

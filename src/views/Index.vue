@@ -37,17 +37,24 @@
                 <nav class="navbar bg-body-tertiary">
 
                     <!-- 导航栏 -->
-                    <div class="container-fluid">
-                        <a class="navbar-brand">
-                            <img src="https://img.icons8.com/cotton/24/null/money--v2.png"
-                                class="d-inline-block align-text-top" alt="Logo" />
-                            Bootstrap
-                        </a>
-                        <form class="d-flex align-items-center" role="search">
-                            <input class="form-control" id="Navin" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-
+                    <div class="container-fluid row ">
+                        <div class="col-1 item">
+                            <a class="navbar-brand">
+                                <img src="https://img.icons8.com/cotton/24/null/money--v2.png"
+                                    class="d-inline-block align-text-top" alt="Logo" />
+                                Bootstrap
+                            </a>
+                        </div>
+                        <div class="col-3 item">
+                            <form class="d-flex align-items-center" role="search">
+                                <input class="form-control" id="Navin" type="search" placeholder="Search"
+                                    aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                        </div>
+                        <div class="col-1 item" id="userImage">
+                            <img src="../image/user.png" alt="userIMage">
+                        </div>
                     </div>
 
                 </nav>
@@ -95,9 +102,9 @@ export default {
     box-sizing: border-box;
 }
 
-/* 导航栏的样式 */
-.header {
-    background-color: beige;
+/* 首页左右区域样式 */
+.item {
+    padding: 0;
 }
 
 /* 侧栏样式 */
@@ -107,13 +114,21 @@ export default {
     text-align: center;
 }
 
-.item {
-    padding: 0;
+/* 导航栏的样式 */
+.header {
+    background-color: beige;
 }
 
-
-
+/* 输入容器高度 */
 #Navin {
     height: 40px;
+}
+
+/* 用户头像的样式 */
+#userImage img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 50%;
 }
 </style>

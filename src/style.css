@@ -44,46 +44,7 @@ a:hover {
   min-height: 100vh;
 } */
 
-body {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 100% 100%;
-  -webkit-animation: Gradient 15s ease infinite;
-  animation: Gradient 15s ease infinite;
-}
 
-@-webkit-keyframes Gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes Gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-body,
-html {
-  height: 100%;
-  overflow: hidden;
-}
 
 h1 {
   font-size: 3.2em;
@@ -115,12 +76,16 @@ button:focus-visible {
   padding: 2em;
 }
 
-#app {
-  max-width: 100vw;
+/* #app {
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
+  top: 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0);
-  /* text-align: center; */
-}
+  text-align: center;
+  position: absolute;
+} */
 
 @media (prefers-color-scheme: light) {
   :root {

@@ -50,6 +50,9 @@
             </div>
 
             <!-- footer区域 -->
+            <div class="footer">
+                
+            </div>
         </div>
     </div>
 </template>

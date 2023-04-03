@@ -100,7 +100,8 @@ export default {
 
 /* 导航栏的样式 */
 .header {
-    background-color: beige;
+    /* background-color: beige; */
+    box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
 }
 
 /* 输入容器高度 */

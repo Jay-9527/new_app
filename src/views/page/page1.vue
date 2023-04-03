@@ -1,6 +1,6 @@
 <template>
+    <!-- 首页展示 -->
     <div>
-        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-            home</div>
+        首页展示
     </div>
 </template>

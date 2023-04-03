@@ -28,28 +28,47 @@ const RoutsList = [
                 hidden: false
             },
             {
-                path: 'list-people',
+                path: 'list-worker',
                 component: () => import('../views/page/page2.vue'),
                 hidden: false
             },
             {
-                path: 'list-asset',
+                path: 'list-people',
                 component: () => import('../views/page/page3.vue'),
                 hidden: false
             },
             {
-                path: 'list-vendor',
+                path: 'list-assettype',
                 component: () => import('../views/page/page4.vue'),
                 hidden: false
             },
             {
-                path: 'list-claims',
+                path: 'list-brand',
                 component: () => import('../views/page/page5.vue'),
+                hidden: false
+            }, {
+                path: 'list-getMethod',
+                component: () => import('../views/page/page6.vue'),
+                hidden: false
+            },
+            {
+                path: 'list-vendor',
+                component: () => import('../views/page/page7.vue'),
+                hidden: false
+            },
+            {
+                path: 'list-address',
+                component: () => import('../views/page/page8.vue'),
+                hidden: false
+            },
+            {
+                path: 'list-claims',
+                component: () => import('../views/page/page9.vue'),
                 hidden: false
             },
             {
                 path: 'list-repair',
-                component: () => import('../views/page/page6.vue'),
+                component: () => import('../views/page/page10.vue'),
                 hidden: false
             },
             {
@@ -60,6 +79,10 @@ const RoutsList = [
             {
                 path: 'list-export',
                 component: () => import('../views/page/page8.vue'),
+                hidden: false
+            }, {
+                path: 'list-info',
+                component: () => import('../views/page/page11.vue'),
                 hidden: false
             }
         ]

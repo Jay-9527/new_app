@@ -16,7 +16,7 @@
                     <div class="container-fluid row ">
                         <div class="col-1 item" id="logo">
                             <span>
-                                <a class="navbar-brand">
+                                <a class="navbar-brand" href="/index">
                                     <img src="https://img.icons8.com/cotton/24/null/money--v2.png"
                                         class="d-inline-block align-text-top" alt="Logo" />
                                     资产系统
@@ -44,6 +44,7 @@
             <!-- content区域 -->
             <div>
                 <div class="tab-content" id="nav-tabContent">
+                    <SuccessMessage/>
                     <RouterView />
                 </div>
             </div>
@@ -58,15 +59,21 @@
 
 <script >
 import sidebar from './navigations/sidebar.vue';
+import SuccessMessage from './modal/SuccessMessage.vue';
 
 export default {
     name: 'App5Index',
-    components: { sidebar },
+    components: { sidebar, SuccessMessage },
 
     data() {
         return {
             name: "ssss"
         };
+    },
+
+    // 初始化
+    created() {
+
     },
 
     mounted() {

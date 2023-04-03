@@ -6,8 +6,11 @@ import './scss/styles.scss'
 import "@popperjs/core"
 import "bootstrap"
 import './scss/global.scss'
+// 导入store
+import store from './utils/vuex/m'
 
 const app = createApp(App)
 
 app.use(router)
 app.mount('#app')
+app.use(store)

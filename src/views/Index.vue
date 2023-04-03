@@ -14,7 +14,7 @@
 
                     <!-- 导航栏 -->
                     <div class="container-fluid row ">
-                        <div class="col-1 item">
+                        <div class="col-1 item" id="logo">
                             <span>
                                 <a class="navbar-brand">
                                     <img src="https://img.icons8.com/cotton/24/null/money--v2.png"
@@ -32,9 +32,8 @@
                         </div>
                         <div class="col-1 item" id="userImage">
                             <div class="set">
-
+                                <img src="../image/user.png" alt="userIMage">
                             </div>
-                            <img src="../image/user.png" alt="userIMage">
                         </div>
                     </div>
 
@@ -51,7 +50,7 @@
 
             <!-- footer区域 -->
             <div class="footer">
-                
+
             </div>
         </div>
     </div>
@@ -94,7 +93,10 @@ export default {
     padding: 0;
 }
 
-
+/* logo */
+#logo {
+    margin-left: 20px;
+}
 
 /* 导航栏的样式 */
 .header {

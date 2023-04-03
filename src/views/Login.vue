@@ -40,7 +40,7 @@
 <script>
 import { createDOMCompilerError } from '@vue/compiler-dom'
 import { createApp } from 'vue'
-import request from "../utils/request"
+import request from "../utils/axios/request"
 import qs from "qs"
 
 export default {
@@ -73,7 +73,8 @@ export default {
                 console.log(resp)
                 if (resp.status == 200) {
                     this.$router.push({
-                        path: '/index'
+                        path: '/index',
+                        name: 'access'
                     })
                 }
             }).catch(error => console.log(error))

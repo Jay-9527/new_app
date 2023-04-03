@@ -1,5 +1,5 @@
 <template>
     <div>
-        库存地址管理
+        个人信息
     </div>
 </template>

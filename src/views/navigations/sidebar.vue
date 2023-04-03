@@ -2,13 +2,18 @@
     <div class="navigation">
         <div class="list-group list-group-flush menu" role="tablist" id="list-tab">
             <router-link class="nav-item " to="/index/list-home" tager="span">DashBoard</router-link>
+            <router-link class="nav-item " to="/index/list-worker" tager="span">部门管理</router-link>
             <router-link class="nav-item" to="/index/list-people" tager="span">人员管理</router-link>
-            <router-link class="nav-item" to="/index/list-asset" tager="span">资产管理</router-link>
-            <router-link class="nav-item" to="/index/list-vendor" tager="span">厂商管理</router-link>
-            <router-link class="nav-item" to="/index/list-claims" tager="span">报销管理</router-link>
-            <router-link class="nav-item" to="/index/list-repair" tager="span">维修管理</router-link>
-            <router-link class="nav-item" to="/index/list-permission" tager="span">权限管理</router-link>
-            <router-link class="nav-item" to="/index/list-export" tager="span">列表导出</router-link>
+            <router-link class="nav-item" to="/index/list-assettype" tager="span">资产类别</router-link>
+            <router-link class="nav-item" to="/index/list-brand" tager="span">品牌</router-link>
+            <router-link class="nav-item" to="/index/list-getMethod" tager="span">取得方式</router-link>
+            <router-link class="nav-item" to="/index/list-vendor" tager="span">供应商管理</router-link>
+            <router-link class="nav-item" to="/index/list-address" tager="span">存放地址</router-link>
+            <router-link class="nav-item" to="/index/list-claims" tager="span">设备用途</router-link>
+            <router-link class="nav-item" to="/index/list-repair" tager="span">报销管理</router-link>
+            <router-link class="nav-item" to="/index/list-info" tager="span">个人信息</router-link>
+            <!-- <router-link class="nav-item" to="/index/list-permission" tager="span">权限管理</router-link>
+            <router-link class="nav-item" to="/index/list-export" tager="span">列表导出</router-link> -->
         </div>
     </div>
 </template>

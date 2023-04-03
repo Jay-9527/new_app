@@ -1,5 +1,5 @@
 <template>
     <div>
-        库存地址管理
+        设备用途
     </div>
 </template>

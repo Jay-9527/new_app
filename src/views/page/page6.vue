@@ -1,5 +1,5 @@
 <template>
     <div>
-        维修管理功能
+        取得方式功能
     </div>
 </template>

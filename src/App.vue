@@ -1,14 +1,5 @@
 <script setup>
 import { computed } from 'vue';
-// import SuccessMessage from './views/modal/SuccessMessage.vue'
-// import store from './utils/vuex/store'
-
-// const code = computed(() => { store.state.isLogin })
-// const c = computed(() => { code.value })
-
-// const message = computed(() => { store.state.successMessage })
-// const m = computed(()=>{message.value})
-
 </script>
 
 <template>

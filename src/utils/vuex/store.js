@@ -6,7 +6,8 @@ const store = createStore({
     state() {
         return {
             isLogin: false,
-            successMessage: ''
+            successMessage: '',
+            showLoginSuccess: false
         }
     },
     mutations: {
@@ -18,6 +19,9 @@ const store = createStore({
         },
         setSuccessMessage(state, message) {
             state.successMessage = message;
+        },
+        setShowLoginSuccess(state, value) { // 新增 mutation
+            state.showLoginSuccess = value;
         }
     },
     actions: {

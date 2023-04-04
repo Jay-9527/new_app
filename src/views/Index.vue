@@ -44,7 +44,13 @@
             <!-- content区域 -->
             <div>
                 <div class="tab-content" id="nav-tabContent">
-                    <SuccessMessage />
+                    <!-- <div class="tipes" style="display: none;">
+                        <el-notification v-if="$store.state.showLoginSuccess" title="登录成功" type="success" :duration="3000"
+                            @close="$store.commit('setShowLoginSuccess', false)">
+                            您已成功登录！
+                        </el-notification>
+                    </div> -->
+                    <SuccessMessage v-model="message" />
                     <RouterView />
                 </div>
             </div>
@@ -60,20 +66,23 @@
 <script >
 import sidebar from './navigations/sidebar.vue';
 import SuccessMessage from './modal/SuccessMessage.vue';
+import { ElNotification } from 'element-plus';
+import store from '../utils/vuex/store';
 
 export default {
     name: 'App5Index',
-    components: { sidebar, SuccessMessage },
+    components: { sidebar, SuccessMessage, ElNotification },
 
     data() {
         return {
-            name: "ssss"
+            name: "ssss",
+            message: null
         };
     },
-
     // 初始化
     created() {
-        console.log(this.$route)
+        const message = store.state.showLoginSuccess.valueOf()
+        this.$data.message = message
     },
 
     mounted() {

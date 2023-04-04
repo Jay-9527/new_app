@@ -44,7 +44,7 @@
             <!-- content区域 -->
             <div>
                 <div class="tab-content" id="nav-tabContent">
-                    <SuccessMessage/>
+                    <SuccessMessage />
                     <RouterView />
                 </div>
             </div>
@@ -73,7 +73,7 @@ export default {
 
     // 初始化
     created() {
-
+        console.log(this.$route)
     },
 
     mounted() {

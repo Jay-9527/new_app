@@ -8,7 +8,7 @@ const RoutsList = [
     // 登录界面
     {
         path: '/login',
-        component: () => import('../views/Login.vue'),
+        component: () => import('../views/Login.vue'), 
         hidden: true
     },
     // 错误界面
@@ -20,6 +20,7 @@ const RoutsList = [
     // 管理界面
     {
         path: '/index',
+        name: 'index',
         component: () => import('../views/Index.vue'),
         children: [
             {
@@ -92,6 +93,7 @@ const RoutsList = [
 export const router = VueRouter.createRouter({
     history: VueRouter.createWebHistory(),
     routes: RoutsList
+    
 });
 
 

@@ -38,10 +38,9 @@
 </template>
 
 <script>
-import { createDOMCompilerError } from '@vue/compiler-dom'
-import { createApp } from 'vue'
 import request from "../utils/axios/request"
 import qs from "qs"
+import { useStore } from 'vuex';
 
 export default {
     data() {
@@ -50,6 +49,10 @@ export default {
             password: '',
             codeImage: ''
         }
+    },
+    setup() {
+        const store = useStore();
+        
     },
     created() {
         var img = this.$data.codeImage;
@@ -70,13 +73,16 @@ export default {
                     'Content-Type': 'application/json'
                 }
             }).then(resp => {
+                // 打印当前请求的对象和响应信息
                 console.log(resp)
-                if (resp.status == 200) {
-                    this.$router.push({
-                        path: '/index',
-                        name: 'access'
-                    })
+                console.log(resp.data.code)
+                console.log(resp.data.msg)
+
+                if (resp.data.code == 200) {
+                    console.log(resp.data.msg)
+                    this.$router.push({ name: 'index' })
                 }
+
             }).catch(error => console.log(error))
         },
         getCode() {

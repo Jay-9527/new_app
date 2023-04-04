@@ -40,7 +40,8 @@
 <script>
 import request from "../utils/axios/request"
 import qs from "qs"
-import { useStore } from 'vuex';
+// import { useStore } from 'vuex';
+import store from "../utils/vuex/store"
 
 export default {
     data() {
@@ -49,10 +50,6 @@ export default {
             password: '',
             codeImage: ''
         }
-    },
-    setup() {
-        const store = useStore();
-        
     },
     created() {
         var img = this.$data.codeImage;
@@ -81,6 +78,7 @@ export default {
                 if (resp.data.code == 200) {
                     console.log(resp.data.msg)
                     this.$router.push({ name: 'index' })
+                    store.commit('setShowLoginSuccess', true)
                 }
 
             }).catch(error => console.log(error))

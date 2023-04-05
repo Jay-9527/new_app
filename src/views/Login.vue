@@ -78,7 +78,7 @@ export default {
                 if (resp.data.code == 200) {
                     console.log(resp.data.msg)
                     this.$router.push({ name: 'index' })
-                    store.commit('setShowLoginSuccess', true)
+                    store.dispatch('login', true)
                 }
 
             }).catch(error => console.log(error))

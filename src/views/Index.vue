@@ -43,14 +43,10 @@
 
             <!-- content区域 -->
             <div>
-                <div class="tab-content" id="nav-tabContent">
-                    <!-- <div class="tipes" style="display: none;">
-                        <el-notification v-if="$store.state.showLoginSuccess" title="登录成功" type="success" :duration="3000"
-                            @close="$store.commit('setShowLoginSuccess', false)">
-                            您已成功登录！
-                        </el-notification>
-                    </div> -->
-                    <SuccessMessage v-model="message" />
+                <div class="content" id="nav-tabContent">
+                    <div class="tips">
+                        欢迎登陆资产系统
+                    </div>                    
                     <RouterView />
                 </div>
             </div>
@@ -131,5 +127,11 @@ export default {
     height: 40px;
     object-fit: contain;
     border-radius: 50%;
+}
+
+/* content样式 */
+.content{
+    max-width: 100%;
+    max-height: 100vh;
 }
 </style>

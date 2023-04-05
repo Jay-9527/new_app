@@ -25,7 +25,9 @@ const store = createStore({
         }
     },
     actions: {
-
+        login(state, boolean){
+            this.login.value
+        }
     }
 })
 

@@ -62,7 +62,7 @@ export default {
     methods: {
         login() {
             request.post('/login',
-                qs.stringify({
+                qs.parse({
                     name: this.$data.username,
                     password: this.$data.password
                 }), {

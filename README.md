@@ -1,6 +1,10 @@
 # 资产系统前端项目
 
 > 这是前端项目所采用的框架：Vue 3 + Vite + Bootstrap，这是DepSystem资产系统的界面代码。
+> 框架地址：
+地址1：https://vxetable.cn/#/table/base/basic vxeTable的说明文档。
+地址2：https://github.com/axios/axios#axios-api Axios 的说明文档。
+地址3：https://router.vuejs.org/installation.html VueRouter 的说明文档。
 
 ---
 

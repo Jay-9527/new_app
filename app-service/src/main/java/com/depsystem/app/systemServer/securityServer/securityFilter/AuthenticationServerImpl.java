@@ -34,7 +34,7 @@ import java.util.Map;
  * 以及用户对路径下的权限。
  * 这里实现查询和封装authentication。
  * 完成
- * 这里实现用户权限校验
+ * 这里实现用户封装
  * @author adiao
  */
 @Service

@@ -120,14 +120,14 @@ class AppApplicationTests {
         System.out.println(path);
 
         System.out.println("**************************************");
-        boolean b = JwtUtil.validateToken("eyJhbGciOiJIUzI1NiJ9.eyJwYXRoIjpbIi9EZWJpdCIsIi9GaXgiLCIvSW52ZW50b3J5IiwiL01haW50ZW5hbmNlIiwiL21lIiwiL1B1cmNoYXNlIiwiL1F1ZXJ5IiwiL1JlcGFpciIsIi9TdG9yYWdlIiwiL1RyYW5zZmVyIl0sInJvbGUiOiJhZG1pbjIiLCJuYW1lIjoiNjgzNjk3NDE0IiwiZXhwIjoxNjgyMjU0NjkyLCJpYXQiOjE2ODIyNTEwOTJ9.Sf3p5o8p_Tj-33zXfofx1ld-ugXW7WYCewhx27nHSnw");
+        boolean b = JwtUtil.validateToken("eyJhbGciOiJIUzI1NiJ9.eyJwYXRoIjoiWy9EZWJpdCwgL0ZpeCwgL0ludmVudG9yeSwgL01haW50ZW5hbmNlLCAvbWUsIC9QdXJjaGFzZSwgL1F1ZXJ5LCAvUmVwYWlyLCAvU3RvcmFnZSwgL1RyYW5zZmVyXSIsInJvbGUiOiJhZG1pbjIiLCJuYW1lIjoiNjgzNjk3NDE0IiwiZXhwIjoxNjgyMjc2OTMzLCJpYXQiOjE2ODIyNzMzMzN9.0zmWGYUcTg43nbx1QA4WIOjg5jdB3Ne8R81ah7b6MVI");
         System.out.println(b);
-        String usernameFromToken = JwtUtil.getUsernameFromToken("eyJhbGciOiJIUzI1NiJ9.eyJwYXRoIjpbIi9EZWJpdCIsIi9GaXgiLCIvSW52ZW50b3J5IiwiL01haW50ZW5hbmNlIiwiL21lIiwiL1B1cmNoYXNlIiwiL1F1ZXJ5IiwiL1JlcGFpciIsIi9TdG9yYWdlIiwiL1RyYW5zZmVyIl0sInJvbGUiOiJhZG1pbjIiLCJuYW1lIjoiNjgzNjk3NDE0IiwiZXhwIjoxNjgyMjU0NjkyLCJpYXQiOjE2ODIyNTEwOTJ9.Sf3p5o8p_Tj-33zXfofx1ld-ugXW7WYCewhx27nHSnw");
-        String roleFromToken = JwtUtil.getRoleFromToken("eyJhbGciOiJIUzI1NiJ9.eyJwYXRoIjpbIi9EZWJpdCIsIi9GaXgiLCIvSW52ZW50b3J5IiwiL01haW50ZW5hbmNlIiwiL21lIiwiL1B1cmNoYXNlIiwiL1F1ZXJ5IiwiL1JlcGFpciIsIi9TdG9yYWdlIiwiL1RyYW5zZmVyIl0sInJvbGUiOiJhZG1pbjIiLCJuYW1lIjoiNjgzNjk3NDE0IiwiZXhwIjoxNjgyMjU0NjkyLCJpYXQiOjE2ODIyNTEwOTJ9.Sf3p5o8p_Tj-33zXfofx1ld-ugXW7WYCewhx27nHSnw");
-        List<String> pathFromToken = JwtUtil.getPathFromToken("eyJhbGciOiJIUzI1NiJ9.eyJwYXRoIjpbIi9EZWJpdCIsIi9GaXgiLCIvSW52ZW50b3J5IiwiL01haW50ZW5hbmNlIiwiL21lIiwiL1B1cmNoYXNlIiwiL1F1ZXJ5IiwiL1JlcGFpciIsIi9TdG9yYWdlIiwiL1RyYW5zZmVyIl0sInJvbGUiOiJhZG1pbjIiLCJuYW1lIjoiNjgzNjk3NDE0IiwiZXhwIjoxNjgyMjU0NjkyLCJpYXQiOjE2ODIyNTEwOTJ9.Sf3p5o8p_Tj-33zXfofx1ld-ugXW7WYCewhx27nHSnw");
+        String usernameFromToken = JwtUtil.getUsernameFromToken("eyJhbGciOiJIUzI1NiJ9.eyJwYXRoIjoiWy9EZWJpdCwgL0ZpeCwgL0ludmVudG9yeSwgL01haW50ZW5hbmNlLCAvbWUsIC9QdXJjaGFzZSwgL1F1ZXJ5LCAvUmVwYWlyLCAvU3RvcmFnZSwgL1RyYW5zZmVyXSIsInJvbGUiOiJhZG1pbjIiLCJuYW1lIjoiNjgzNjk3NDE0IiwiZXhwIjoxNjgyMjc2OTMzLCJpYXQiOjE2ODIyNzMzMzN9.0zmWGYUcTg43nbx1QA4WIOjg5jdB3Ne8R81ah7b6MVI");
+        String roleFromToken = JwtUtil.getRoleFromToken("eyJhbGciOiJIUzI1NiJ9.eyJwYXRoIjoiWy9EZWJpdCwgL0ZpeCwgL0ludmVudG9yeSwgL01haW50ZW5hbmNlLCAvbWUsIC9QdXJjaGFzZSwgL1F1ZXJ5LCAvUmVwYWlyLCAvU3RvcmFnZSwgL1RyYW5zZmVyXSIsInJvbGUiOiJhZG1pbjIiLCJuYW1lIjoiNjgzNjk3NDE0IiwiZXhwIjoxNjgyMjc2OTMzLCJpYXQiOjE2ODIyNzMzMzN9.0zmWGYUcTg43nbx1QA4WIOjg5jdB3Ne8R81ah7b6MVI");
+        //List<String> pathFromToken = JwtUtil.getPathFromToken("eyJhbGciOiJIUzI1NiJ9.eyJwYXRoIjpbIi9EZWJpdCIsIi9GaXgiLCIvSW52ZW50b3J5IiwiL01haW50ZW5hbmNlIiwiL21lIiwiL1B1cmNoYXNlIiwiL1F1ZXJ5IiwiL1JlcGFpciIsIi9TdG9yYWdlIiwiL1RyYW5zZmVyIl0sInJvbGUiOiJhZG1pbjIiLCJuYW1lIjoiNjgzNjk3NDE0IiwiZXhwIjoxNjgyMjU0NjkyLCJpYXQiOjE2ODIyNTEwOTJ9.Sf3p5o8p_Tj-33zXfofx1ld-ugXW7WYCewhx27nHSnw");
         System.out.println(usernameFromToken);
         System.out.println(roleFromToken);
-        System.out.println(pathFromToken);
+        //System.out.println(pathFromToken);
         System.out.println("**************************************");
         JWT jwt = JWTUtil.parseToken("eyJhbGciOiJIUzI1NiJ9.eyJwYXRoIjpbIi9EZWJpdCIsIi9GaXgiLCIvSW52ZW50b3J5IiwiL01haW50ZW5hbmNlIiwiL21lIiwiL1B1cmNoYXNlIiwiL1F1ZXJ5IiwiL1JlcGFpciIsIi9TdG9yYWdlIiwiL1RyYW5zZmVyIl0sInJvbGUiOiJhZG1pbjIiLCJuYW1lIjoiNjgzNjk3NDE0IiwiZXhwIjoxNjgyMjU0MzkzLCJpYXQiOjE2ODIyNTA3OTN9.Jwg5jjobsLCaJy42aF0MzTpoA6ryfnw8SGiJCOdh5WI");
         JWTPayload payload = jwt.getPayload();

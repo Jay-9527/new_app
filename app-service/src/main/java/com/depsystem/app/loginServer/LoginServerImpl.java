@@ -24,6 +24,10 @@ public class LoginServerImpl implements LoginServer {
      */
     @Override
     public Login login(String name, String password) {
+
+
+
+
         LoginDAO userByNameAndPassword = userMapper.findUserByNameAndPassword(name, password);
         Login vo =new Login();
         if (JSONUtil.isNull(userByNameAndPassword)){

@@ -1,7 +1,7 @@
 HELP.md
 WebVue/
 WebVue/.vscode/
-
+WebVue/.vscode/.gitignore
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

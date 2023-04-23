@@ -16,11 +16,23 @@
 
 package com.depsystem.app.demos.web;
 
+import cn.hutool.captcha.CaptchaUtil;
+import cn.hutool.captcha.LineCaptcha;
+import cn.hutool.core.lang.UUID;
+import com.depsystem.app.loginServer.Login;
+import com.depsystem.app.loginServer.LoginServerImpl;
+import com.depsystem.app.systemServer.securityServer.securityVO.*;
+import com.depsystem.app.systemServer.util.ResponseResult;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.TimeUnit;
+
+import static com.depsystem.app.systemServer.util.ResponseResult.*;
 
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
@@ -28,14 +40,46 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class BasicController {
 
-    // http://127.0.0.1:8080/hello?name=lisi
+    @Resource
+    LoginServerImpl loginServer;
+    @Autowired
+    StringRedisTemplate redisTemplate;
+
+    @RequestMapping("/api/login")
+    @ResponseBody
+    public ResponseResult<?> login(@RequestBody Login user){
+        Login login = loginServer.login(user.getName(), user.getPassword());
+        return ok(login);
+    }
+
+    /**
+     * CaptchaGenerateCreate
+     */
+    @RequestMapping(value = "/captcha",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseResult<CaptchaVO> getCaptcha(HttpServletResponse response){
+        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200,100);
+        String code = lineCaptcha.getCode();
+        String base64 = lineCaptcha.getImageBase64Data();
+        CaptchaVO captcha = new CaptchaVO();
+        captcha.setId(UUID.randomUUID().toString());
+        captcha.setBase64(base64);
+        redisTemplate.opsForValue().set(captcha.getId(), code,10, TimeUnit.MINUTES);
+        return ok(captcha,"验证创建成功");
+    }
+
+    /**
+     * <a href="http://127.0.0.1:8080/hello?name=lisi">...</a>
+     */
     @RequestMapping("/hello")
     @ResponseBody
     public String hello(@RequestParam(name = "name", defaultValue = "unknown user") String name) {
         return "Hello " + name;
     }
 
-    // http://127.0.0.1:8080/user
+    /**
+     * <a href="http://127.0.0.1:8080/user">...</a>
+     */
     @RequestMapping("/user")
     @ResponseBody
     public User user() {
@@ -45,14 +89,18 @@ public class BasicController {
         return user;
     }
 
-    // http://127.0.0.1:8080/save_user?name=newName&age=11
+    /**
+     * <a href="http://127.0.0.1:8080/save_user?name=newName&age=11">...</a>
+     */
     @RequestMapping("/save_user")
     @ResponseBody
     public String saveUser(User u) {
         return "user will save: name=" + u.getName() + ", age=" + u.getAge();
     }
 
-    // http://127.0.0.1:8080/html
+    /**
+     * <a href="http://127.0.0.1:8080/html">...</a>
+     */
     @RequestMapping("/html")
     public String html(){
         return "index.html";

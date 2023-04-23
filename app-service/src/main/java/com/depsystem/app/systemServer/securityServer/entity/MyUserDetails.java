@@ -9,7 +9,6 @@ package com.depsystem.app.systemServer.securityServer.entity;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.depsystem.app.loginServer.Login;
-import jakarta.annotation.Nullable;
 import jakarta.annotation.Resource;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,44 +18,30 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.ObjectUtils;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
 public class MyUserDetails implements UserDetails {
     @Resource
     Login login;
+    private List<String> permissions;
     private String roles;
     private List<String> path;
     @JSONField(serialize = false)
     private List<GrantedAuthority> authorities;
-    private boolean accountNonExpired;
-    private boolean accountNonLocked;
-    private boolean credentialsNonExpired;
-    private boolean isEnabled;
-
-    public MyUserDetails(Login loginVO, String roles, List<String> paths) {
-
-        this(loginVO,roles,paths,true,true,true,true);
-    }
-
-    public MyUserDetails(Login loginVO, String roles, List<String> paths, boolean b, boolean b1, boolean b2, boolean b3) {
-        this.login = loginVO;
-        this.roles = roles;
-        this.path = paths;
-        this.accountNonExpired = b;
-        this.accountNonLocked = b1;
-        this.credentialsNonExpired = b2;
-        this.isEnabled = b3;
-    }
-
     public String getRoles() {
         return roles;
     }
     public List<String> getPath() {
         return this.path;
+    }
+    public MyUserDetails(Login login, String roles, List<String> permissions,List<String> paths) {
+        this.login=login;
+        this.permissions = permissions;
+        this.roles=roles;
+        this.path=paths;
     }
 
     @Override
@@ -65,8 +50,7 @@ public class MyUserDetails implements UserDetails {
         {
             return authorities;
         }
-        SimpleGrantedAuthority sb = new SimpleGrantedAuthority(roles);
-        authorities = Collections.singletonList(sb);
+        authorities = permissions.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
         return authorities;
     }
 
@@ -85,7 +69,7 @@ public class MyUserDetails implements UserDetails {
      */
     @Override
     public boolean isAccountNonExpired() {
-        return accountNonExpired;
+        return false;
     }
 
     /** 实现帐户是否被锁定的逻辑
@@ -93,7 +77,7 @@ public class MyUserDetails implements UserDetails {
      */
     @Override
     public boolean isAccountNonLocked() {
-        return accountNonLocked;
+        return false;
     }
 
     /** 实现凭证是否过期的逻辑
@@ -101,7 +85,7 @@ public class MyUserDetails implements UserDetails {
      */
     @Override
     public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
+        return false;
     }
 
     /** 实现帐户是否启用的逻辑
@@ -109,6 +93,6 @@ public class MyUserDetails implements UserDetails {
      */
     @Override
     public boolean isEnabled() {
-        return isEnabled;
+        return false;
     }
 }

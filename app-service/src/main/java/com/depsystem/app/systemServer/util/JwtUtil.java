@@ -7,10 +7,10 @@
 
 package com.depsystem.app.systemServer.util;
 
-import java.util.*;
-
-import io.jsonwebtoken.*;
-
+import java.util.Date;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.SignatureAlgorithm;
 import static io.jsonwebtoken.Jwts.*;
 
 public class JwtUtil {
@@ -21,21 +21,23 @@ public class JwtUtil {
 
     /**
      * 动态生成token
-     *  username 用户名
-     *  roles 角色
-     *  path 权限
+     * @param username 用户名
+     * @param roles 角色
+     * @param permission 权限
      * @return token
      * setSubject 是加密的字段。
      * setIssuedAt是设置发布时间。
      * setExpiration 是有效时长。
      * setIssuedAt 是签发时间。
      */
-    public static String generateToken(Map<String,Object> userinfo) {
+    public static String generateToken(String username,String roles,String permission) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
 
         return builder()
-                .setClaims(userinfo)
+                .setSubject(username)
+                .setSubject(roles)
+                .setSubject(permission)
                 .setIssuedAt(now)
                 .setExpiration(new Date(nowMillis + 3600000))
                 .setIssuedAt(new Date())
@@ -46,24 +48,12 @@ public class JwtUtil {
 
     /**
      * 解token
-     *
      * @param token token
+     * @return 返回
      */
-    public static boolean validateToken(String token) {
-        try {
-            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
-            return true;
-        } catch (MalformedJwtException e) {
-            System.out.println("Invalid JWT token: " + e.getMessage());
-        } catch (ExpiredJwtException e) {
-            System.out.println("JWT token is expired: " + e.getMessage());
-        } catch (UnsupportedJwtException e) {
-            System.out.println("JWT token is unsupported: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            System.out.println("JWT claims string is empty: " + e.getMessage());
-        }
-
-        return false;
+    public static Claims validateToken(String token) {
+        Jws<Claims> claimsJws = parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
+        return claimsJws.getBody();
     }
 
     /**
@@ -73,7 +63,7 @@ public class JwtUtil {
      */
     public static String getUsernameFromToken(String token) {
         Claims claims = parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-        return claims.get("name",String.class);
+        return claims.get("username").toString();
     }
     /**
      * 获取token username
@@ -82,16 +72,16 @@ public class JwtUtil {
      */
     public static String getRoleFromToken(String token) {
         Claims claims = parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-        return claims.get("role", String.class);
+        return claims.get("roles").toString();
     }
     /**
      * 获取token username
      * @param token token
      * @return username
      */
-    public static ArrayList<String> getPathFromToken(String token) {
+    public static String getPermissionFromToken(String token) {
         Claims claims = parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-        return (ArrayList<String>) Collections.singletonList(claims.get("path", String.class));
+        return claims.get("permission").toString();
     }
 
 }

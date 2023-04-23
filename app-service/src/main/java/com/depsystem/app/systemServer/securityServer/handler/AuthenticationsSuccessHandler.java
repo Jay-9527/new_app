@@ -9,7 +9,6 @@ package com.depsystem.app.systemServer.securityServer.handler;
 
 import com.depsystem.app.systemServer.securityServer.entity.MyUserDetails;
 import com.depsystem.app.systemServer.util.JwtUtil;
-import com.depsystem.app.systemServer.util.RedisUtil;
 import com.depsystem.app.systemServer.util.ResponseResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
@@ -18,8 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 
 /**
@@ -27,9 +25,6 @@ import java.util.Map;
  * @author adiao
  */
 public class AuthenticationsSuccessHandler implements AuthenticationSuccessHandler {
-
-
-
     /**
      * @param request 请求
      * @param response 响应
@@ -48,21 +43,11 @@ public class AuthenticationsSuccessHandler implements AuthenticationSuccessHandl
         *   data: 存放ResponseResult状态工具类对象。
         *   token: 存放生成好的token
         *  } */
-
         MyUserDetails principal = (MyUserDetails) authentication.getPrincipal();
-        System.out.println(principal);
-        Map<String,Object> userinfo = new HashMap<>();
-        userinfo.put("name",principal.getUsername());
-        userinfo.put("role",principal.getRoles());
-        userinfo.put("path",principal.getPath().toString());
-        RedisUtil redisUtil = new RedisUtil();
-        redisUtil.set("userinfo:",userinfo);
-
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json;charset=utf-8");
-        String s = new ObjectMapper().writeValueAsString(ResponseResult.ok(200,"登录成功",principal.getPath(),
-                JwtUtil.generateToken(userinfo)));
+        String s = new ObjectMapper().writeValueAsString(ResponseResult.ok(200,"登录成功",authentication.getPrincipal(),
+                JwtUtil.generateToken(principal.getUsername(),principal.getRoles(), principal.getPermissions().toString())));
         response.getWriter().write(s);
-
     }
 }

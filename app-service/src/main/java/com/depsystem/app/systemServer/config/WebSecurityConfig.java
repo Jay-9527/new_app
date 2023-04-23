@@ -8,15 +8,18 @@
 package com.depsystem.app.systemServer.config;
 
 import cn.hutool.json.JSONUtil;
-import com.depsystem.app.systemServer.securityServer.securityFilter.AuthenticationServerImpl;
+import com.depsystem.app.systemServer.securityServer.AuthenticationServerImpl;
 import com.depsystem.app.systemServer.securityServer.handler.AuthenticationsFailureHandler;
 import com.depsystem.app.systemServer.securityServer.handler.AuthenticationsSuccessHandler;
+import com.depsystem.app.systemServer.securityServer.securityFilter.CaptchaVerifyFilter;
 import com.depsystem.app.systemServer.util.ResponseResult;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,6 +28,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -39,6 +43,9 @@ public class WebSecurityConfig {
     @Resource
     AuthenticationServerImpl authenticationServer;
 
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
+
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity httpSecurity) throws Exception {
         return  httpSecurity.userDetailsService(authenticationServer)
@@ -51,8 +58,6 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests(author ->
                         author
                                 .requestMatchers("/captcha").permitAll()
-                                .requestMatchers("/index").hasAnyRole("admin1")
-                                .requestMatchers("/{name}/**").hasAnyRole("admin2","admin3")
                                 .anyRequest().authenticated()
                 )
                 .formLogin()
@@ -69,6 +74,7 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(this::onAuthenticationFailure);
+        http.addFilterBefore(new CaptchaVerifyFilter(this::onAuthenticationFailure,stringRedisTemplate), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

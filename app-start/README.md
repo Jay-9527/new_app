@@ -55,3 +55,11 @@ roles ： 是通过后台查询并封装到response中。
 在本项目中。
 
 所访问的路径需要动态一下。
+
+---
+
+原理学习地址:
+
+[(11条消息) Spring Security 6.x\_云烟成雨TD的博客-CSDN博客](https://blog.csdn.net/qq_43437874/category_12259144.html)
+
+[Spring Security 官网](https://spring.io/projects/spring-security[](https://www.bing.com/search?q=spring+security+&qs=n&form=QBRE&sp=-1&lq=0&pq=&sc=0-0&sk=&cvid=DA7F551E132D44F4929E186022FA945B&ghsh=0&ghacc=0&ghpl=&mkt=zh-CN#))

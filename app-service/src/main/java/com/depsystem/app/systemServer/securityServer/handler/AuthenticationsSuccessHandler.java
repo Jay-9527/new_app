@@ -17,7 +17,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import java.io.IOException;
-
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -44,10 +45,15 @@ public class AuthenticationsSuccessHandler implements AuthenticationSuccessHandl
         *   token: 存放生成好的token
         *  } */
         MyUserDetails principal = (MyUserDetails) authentication.getPrincipal();
+        System.out.println(principal);
+        Map<String,Object> userinfo = new HashMap<>();
+        userinfo.put("name",principal.getUsername());
+        userinfo.put("role",principal.getRoles());
+        userinfo.put("path",principal.getPath().toString());
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json;charset=utf-8");
-        String s = new ObjectMapper().writeValueAsString(ResponseResult.ok(200,"登录成功",authentication.getPrincipal(),
-                JwtUtil.generateToken(principal.getUsername(),principal.getRoles(), principal.getPermissions().toString())));
+        String s = new ObjectMapper().writeValueAsString(ResponseResult.ok(200,"登录成功",principal.getPath(),
+                JwtUtil.generateToken(userinfo)));
         response.getWriter().write(s);
     }
 }

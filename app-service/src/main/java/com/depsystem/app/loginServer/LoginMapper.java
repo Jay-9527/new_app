@@ -2,6 +2,7 @@ package com.depsystem.app.loginServer;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.*;
+import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 import java.util.Map;
@@ -67,4 +68,7 @@ public interface LoginMapper extends BaseMapper<LoginDAO> {
                              join menu m on p.operationid = m.permissionId
                     where u.name = #{username};""")
     Map<String,Object> findUserByModelPath(@Param("username") String name);
+
+    @Select("select r.name from users join roles r on r.id = users.rolesid where users.name = #{name}")
+    String getRole(@Param("name") String name);
 }

@@ -16,21 +16,17 @@
 
 package com.depsystem.app.demos.web;
 
-import cn.hutool.captcha.CaptchaUtil;
-import cn.hutool.captcha.LineCaptcha;
-import cn.hutool.core.lang.UUID;
 import com.depsystem.app.loginServer.Login;
 import com.depsystem.app.loginServer.LoginServerImpl;
 import com.depsystem.app.systemServer.securityServer.securityVO.*;
+import com.depsystem.app.systemServer.util.RedisUtil;
 import com.depsystem.app.systemServer.util.ResponseResult;
+import com.wf.captcha.SpecCaptcha;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.concurrent.TimeUnit;
+import java.util.UUID;
 
 import static com.depsystem.app.systemServer.util.ResponseResult.*;
 
@@ -42,8 +38,6 @@ public class BasicController {
 
     @Resource
     LoginServerImpl loginServer;
-    @Autowired
-    StringRedisTemplate redisTemplate;
 
     @RequestMapping("/api/login")
     @ResponseBody
@@ -57,15 +51,16 @@ public class BasicController {
      */
     @RequestMapping(value = "/captcha",method = RequestMethod.GET)
     @ResponseBody
-    public ResponseResult<CaptchaVO> getCaptcha(HttpServletResponse response){
-        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200,100);
-        String code = lineCaptcha.getCode();
-        String base64 = lineCaptcha.getImageBase64Data();
-        CaptchaVO captcha = new CaptchaVO();
-        captcha.setId(UUID.randomUUID().toString());
-        captcha.setBase64(base64);
-        redisTemplate.opsForValue().set(captcha.getId(), code,10, TimeUnit.MINUTES);
-        return ok(captcha,"验证创建成功");
+    public ResponseResult<CaptchaVO> getCaptcha(){
+        SpecCaptcha captcha = new SpecCaptcha(200,100,5);
+        String code = captcha.text().toLowerCase();
+        String key = UUID.randomUUID().toString();
+        RedisUtil redisUtil = new RedisUtil();
+        redisUtil.set(key,code,3);
+        CaptchaVO captchaVO = new CaptchaVO();
+        captchaVO.setId(key);
+        captchaVO.setBase64(captcha.toBase64());
+        return ok(captchaVO,"验证创建成功");
     }
 
     /**

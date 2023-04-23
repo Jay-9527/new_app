@@ -25,65 +25,65 @@ const RoutsList = [
         children: [
             {
                 path: 'list-home',
-                component: () => import('../views/page/page1.vue'),
+                component: () => import('../views/adminManager/page/page1.vue'),
                 hidden: false
             },
             {
                 path: 'list-worker',
-                component: () => import('../views/page/page2.vue'),
+                component: () => import('../views/adminManager/page/page2.vue'),
                 hidden: false
             },
             {
                 path: 'list-people',
-                component: () => import('../views/page/page3.vue'),
+                component: () => import('../views/adminManager/page/page3.vue'),
                 hidden: false
             },
             {
                 path: 'list-assettype',
-                component: () => import('../views/page/page4.vue'),
+                component: () => import('../views/adminManager/page/page4.vue'),
                 hidden: false
             },
             {
                 path: 'list-brand',
-                component: () => import('../views/page/page5.vue'),
+                component: () => import('../views/adminManager/page/page5.vue'),
                 hidden: false
             }, {
                 path: 'list-getMethod',
-                component: () => import('../views/page/page6.vue'),
+                component: () => import('../views/adminManager/page/page6.vue'),
                 hidden: false
             },
             {
                 path: 'list-vendor',
-                component: () => import('../views/page/page7.vue'),
+                component: () => import('../views/adminManager/page/page7.vue'),
                 hidden: false
             },
             {
                 path: 'list-address',
-                component: () => import('../views/page/page8.vue'),
+                component: () => import('../views/adminManager/page/page8.vue'),
                 hidden: false
             },
             {
                 path: 'list-claims',
-                component: () => import('../views/page/page9.vue'),
+                component: () => import('../views/adminManager/page/page9.vue'),
                 hidden: false
             },
             {
                 path: 'list-repair',
-                component: () => import('../views/page/page10.vue'),
+                component: () => import('../views/adminManager/page/page10.vue'),
                 hidden: false
             },
             {
                 path: 'list-permission',
-                component: () => import('../views/page/page7.vue'),
+                component: () => import('../views/adminManager/page/page7.vue'),
                 hidden: false
             },
             {
                 path: 'list-export',
-                component: () => import('../views/page/page8.vue'),
+                component: () => import('../views/adminManager/page/page8.vue'),
                 hidden: false
             }, {
                 path: 'list-info',
-                component: () => import('../views/page/page11.vue'),
+                component: () => import('../views/adminManager/page/page11.vue'),
                 hidden: false
             }
         ]

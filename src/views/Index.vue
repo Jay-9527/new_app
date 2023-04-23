@@ -44,9 +44,6 @@
             <!-- content区域 -->
             <div>
                 <div class="content" id="nav-tabContent">
-                    <div class="tips">
-                        欢迎登陆资产系统
-                    </div>                    
                     <RouterView />
                 </div>
             </div>

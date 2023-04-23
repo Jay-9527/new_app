@@ -26,6 +26,8 @@ dist-ssr
 =======
 HELP.md
 WebVue/
+WebVue/.vscode/
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

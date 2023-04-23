@@ -17,7 +17,7 @@
                                     id="exampleInputPassword1" placeholder="请输入密码">
                             </div>
                             <div class="image">
-                                <img :src="this.codeImage" @click="getCode" style="width: 130px; height: 39px;">
+                                <img :src="this.codeImage" @click="getCode" style="width: 130px; height: 39px;" data-base64="" alt="image">
                                 <input type="text" id="imginput" style="width: 120px;" class="form-control"
                                     placeholder="输入验证码" />
                             </div>
@@ -52,42 +52,34 @@ export default {
         }
     },
     created() {
-        var img = this.$data.codeImage;
-        request.get('/captcha', { responseType: 'blob' }).then((response) => {
-            console.log(response.data)
-            this.codeImage = window.URL.createObjectURL(response.data)
-            console.log(this.codeImage)
+      const img = this.$data.codeImage;
+      request.get('/captcha').then((response) => {
+            this.codeImage = response.data.data.base64
         })
     },
     methods: {
         login() {
-            request.post('/login',
+            request.post('api/login',
                 qs.parse({
-                    name: this.$data.username,
+                    username: this.$data.username,
                     password: this.$data.password
                 }), {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': ' application/x-www-form-urlencoded'
                 }
             }).then(resp => {
                 // 打印当前请求的对象和响应信息
                 console.log(resp)
-                console.log(resp.data.code)
-                console.log(resp.data.msg)
-
-                if (resp.data.code == 200) {
+                if (resp.data.code === 200) {
                     console.log(resp.data.msg)
                     this.$router.push({ name: 'index' })
-                    store.dispatch('login', true)
                 }
 
             }).catch(error => console.log(error))
         },
         getCode() {
-            request.get('/captcha', { responseType: 'blob' }).then((response) => {
-                console.log(response.data)
-                this.codeImage = window.URL.createObjectURL(response.data)
-                console.log(this.codeImage)
+            request.get('/captcha').then((response) => {
+                this.codeImage = response.data.data.base64
             })
         },
         toRegister() {

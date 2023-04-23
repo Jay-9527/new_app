@@ -60,7 +60,7 @@ public class AuthenticationServerImpl implements UserDetailsService {
             paths.add(pair.trim());
         }
 
-        return new MyUserDetails(loginVO,roles,,paths);
+        return new MyUserDetails();
     }
 
     private void checkPermission(String token){
@@ -77,7 +77,7 @@ public class AuthenticationServerImpl implements UserDetailsService {
 
 
     private String getPermission(String name){
-
+        return null;
     }
 
 

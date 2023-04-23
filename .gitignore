@@ -25,6 +25,7 @@ dist-ssr
 *.sw?
 =======
 HELP.md
+WebVue/
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

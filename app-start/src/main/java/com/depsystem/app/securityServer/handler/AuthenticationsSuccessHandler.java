@@ -5,11 +5,11 @@
  * @apiNote
  */
 
-package com.depsystem.app.systemServer.securityServer.handler;
+package com.depsystem.app.securityServer.handler;
 
-import com.depsystem.app.systemServer.securityServer.entity.MyUserDetails;
+import com.depsystem.app.securityServer.entity.MyUserDetails;
+import com.depsystem.app.systemServer.util.CacheUtil;
 import com.depsystem.app.systemServer.util.JwtUtil;
-import com.depsystem.app.systemServer.util.RedisUtil;
 import com.depsystem.app.systemServer.util.ResponseResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +28,10 @@ import java.util.Map;
  * @author adiao
  */
 public class AuthenticationsSuccessHandler implements AuthenticationSuccessHandler {
+
+
+    CacheUtil redisUtil = new CacheUtil();
+
     /**
      * @param request 请求
      * @param response 响应
@@ -52,7 +57,7 @@ public class AuthenticationsSuccessHandler implements AuthenticationSuccessHandl
         userinfo.put("name",principal.getUsername());
         userinfo.put("role",principal.getRoles());
         userinfo.put("path",principal.getPath().toString());
-        RedisUtil redisUtil = new RedisUtil();
+        //RedisUtil redisUtil = new RedisUtil();
         redisUtil.set("userinfo:",userinfo);
 
         response.setCharacterEncoding("utf-8");

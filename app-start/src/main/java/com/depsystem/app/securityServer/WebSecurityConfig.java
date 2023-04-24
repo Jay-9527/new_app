@@ -5,12 +5,14 @@
  * @apiNote
  */
 
-package com.depsystem.app.systemServer.config;
+package com.depsystem.app.securityServer;
 
 import cn.hutool.json.JSONUtil;
-import com.depsystem.app.systemServer.securityServer.securityFilter.AuthenticationServerImpl;
-import com.depsystem.app.systemServer.securityServer.handler.AuthenticationsFailureHandler;
-import com.depsystem.app.systemServer.securityServer.handler.AuthenticationsSuccessHandler;
+
+
+import com.depsystem.app.securityServer.handler.AuthenticationsFailureHandler;
+import com.depsystem.app.securityServer.handler.AuthenticationsSuccessHandler;
+import com.depsystem.app.securityServer.securityFilter.AuthenticationServerImpl;
 import com.depsystem.app.systemServer.util.ResponseResult;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;

@@ -5,22 +5,18 @@
  * @apiNote
  */
 
-package com.depsystem.app.systemServer.securityServer.securityFilter;
+package com.depsystem.app.securityServer.securityFilter;
 
 import cn.hutool.core.util.StrUtil;
-import com.depsystem.app.loginServer.Login;
-import com.depsystem.app.systemServer.securityServer.entity.MyUserDetails;
+import com.depsystem.app.securityServer.entity.MyUserDetails;
+import com.depsystem.app.systemServer.util.CacheUtil;
 import com.depsystem.app.systemServer.util.JwtUtil;
-import com.depsystem.app.systemServer.util.RedisUtil;
-import io.jsonwebtoken.Claims;
 import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -29,7 +25,7 @@ import java.util.Objects;
 
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Resource
-    RedisUtil redisUtil;
+    CacheUtil redisUtil;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader("token");

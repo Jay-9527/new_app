@@ -5,7 +5,7 @@
  * @apiNote
  */
 
-package com.depsystem.app.systemServer.securityServer.exception;
+package com.depsystem.app.securityServer.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

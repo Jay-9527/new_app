@@ -9,21 +9,20 @@ import cn.hutool.jwt.JWTUtil;
 import com.depsystem.app.loginServer.Login;
 import com.depsystem.app.loginServer.LoginDAO;
 import com.depsystem.app.loginServer.LoginMapper;
-import com.depsystem.app.systemServer.securityServer.entity.MyUserDetails;
+
+import com.depsystem.app.securityServer.entity.MyUserDetails;
+import com.depsystem.app.systemServer.util.Cache;
+import com.depsystem.app.systemServer.util.CacheUtil;
 import com.depsystem.app.systemServer.util.JwtUtil;
 import com.depsystem.app.systemServer.util.ResultConvert;
-import io.jsonwebtoken.Claims;
+
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.io.UnsupportedEncodingException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 class AppApplicationTests {
@@ -138,6 +137,25 @@ class AppApplicationTests {
         System.out.println(payloads);
         System.out.println("**************************************");
 
+    }
+
+    //@Resource
+    //CacheUtil cacheUtil;
+
+    @Test
+    void CacheUtils() {
+        Map<String,Object> map = new HashMap<>();
+        map.put("name","ds-dds");
+        map.put("age",23);
+        map.put("iphone", "12312312123");
+        //cacheUtil.set("sss",map,30);
+        //Object sss = cacheUtil.get("sss");
+        //System.out.println(sss.toString());
+        System.out.println("**************************************");
+        Cache println = new Cache();
+        println.add("myKey",map,10, TimeUnit.MINUTES);
+        String myKey = println.get("myKey");
+        System.out.println(myKey);
     }
 
 }

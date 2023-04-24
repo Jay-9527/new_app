@@ -16,10 +16,10 @@
 
 package com.depsystem.app.demos.web;
 
+import com.depsystem.app.loginServer.CaptchaVO;
 import com.depsystem.app.loginServer.Login;
 import com.depsystem.app.loginServer.LoginServerImpl;
-import com.depsystem.app.systemServer.securityServer.securityVO.*;
-import com.depsystem.app.systemServer.util.RedisUtil;
+import com.depsystem.app.systemServer.util.CacheUtil;
 import com.depsystem.app.systemServer.util.ResponseResult;
 import com.wf.captcha.SpecCaptcha;
 import jakarta.annotation.Resource;
@@ -55,7 +55,7 @@ public class BasicController {
         SpecCaptcha captcha = new SpecCaptcha(200,100,5);
         String code = captcha.text().toLowerCase();
         String key = UUID.randomUUID().toString();
-        RedisUtil redisUtil = new RedisUtil();
+        CacheUtil redisUtil = new CacheUtil();
         redisUtil.set(key,code,3);
         CaptchaVO captchaVO = new CaptchaVO();
         captchaVO.setId(key);

@@ -5,7 +5,7 @@
  * @apiNote
  */
 
-package com.depsystem.app.systemServer.securityServer.entity;
+package com.depsystem.app.securityServer.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

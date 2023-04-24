@@ -5,11 +5,10 @@
  * @apiNote
  */
 
-package com.depsystem.app.systemServer.securityServer.entity;
+package com.depsystem.app.securityServer.entity;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.depsystem.app.loginServer.Login;
-import jakarta.annotation.Nullable;
 import jakarta.annotation.Resource;
 import lombok.Data;
 import lombok.NoArgsConstructor;

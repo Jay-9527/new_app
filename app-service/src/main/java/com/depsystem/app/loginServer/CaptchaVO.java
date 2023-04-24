@@ -5,7 +5,7 @@
  * @apiNote
  */
 
-package com.depsystem.app.systemServer.securityServer.securityVO;
+package com.depsystem.app.loginServer;
 
 import lombok.Data;
 

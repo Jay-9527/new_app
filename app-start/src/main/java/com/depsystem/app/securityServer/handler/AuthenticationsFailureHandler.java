@@ -5,7 +5,7 @@
  * @apiNote
  */
 
-package com.depsystem.app.systemServer.securityServer.handler;
+package com.depsystem.app.securityServer.handler;
 
 import cn.hutool.json.JSONUtil;
 import com.depsystem.app.systemServer.util.ResponseResult;

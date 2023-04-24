@@ -5,17 +5,16 @@
  * @apiNote
  */
 
-package com.depsystem.app.systemServer.securityServer.securityFilter;
+package com.depsystem.app.securityServer.securityFilter;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.depsystem.app.loginServer.Login;
 import com.depsystem.app.loginServer.LoginDAO;
 import com.depsystem.app.loginServer.LoginMapper;
-import com.depsystem.app.systemServer.securityServer.entity.MyUserDetails;
+import com.depsystem.app.securityServer.entity.MyUserDetails;
 import com.depsystem.app.systemServer.util.ResultConvert;
 import jakarta.annotation.Resource;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -23,6 +23,7 @@ import com.depsystem.app.systemServer.util.RedisUtil;
 import com.depsystem.app.systemServer.util.ResponseResult;
 import com.wf.captcha.SpecCaptcha;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -32,13 +33,15 @@ import java.util.UUID;
 import static com.depsystem.app.systemServer.util.ResponseResult.*;
 
 /**
- * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
+ *
  */
 @Controller
 public class BasicController {
 
     @Resource
     LoginServerImpl loginServer;
+    @Resource
+    RedisUtil redisUtil;
 
     @RequestMapping("/api/login")
     @ResponseBody
@@ -56,7 +59,6 @@ public class BasicController {
         SpecCaptcha captcha = new SpecCaptcha(200,100,5);
         String code = captcha.text().toLowerCase();
         String key = UUID.randomUUID().toString();
-        RedisUtil redisUtil = new RedisUtil();
         redisUtil.set(key,code,3);
         CaptchaVO captchaVO = new CaptchaVO();
         captchaVO.setId(key);

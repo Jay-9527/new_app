@@ -12,6 +12,7 @@ package com.depsystem.app.systemServer.util;
 import jakarta.annotation.Resource;
 
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import java.util.List;
@@ -28,6 +29,7 @@ public final class RedisUtil {
 //        this. redisTemplate = rt;
 //    }
     @Resource
+    @Qualifier("myRedisTemplate")
     private RedisTemplate<String,Object> redisTemplate;
 
     public RedisUtil() {
@@ -38,20 +40,19 @@ public final class RedisUtil {
      *
      * @param key  键
      * @param time 时间(秒)
-     * @return
+     *
      */
-    public Boolean expire(String key, long time) {
-        boolean exp = true;
+    public boolean expire(String key, long time) {
+
         try {
             if (time > 0) {
                 redisTemplate.expire(key, time, TimeUnit.SECONDS);
             }
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
-            exp = false;
-            return exp;
+            return false;
         }
-        return exp;
     }
 
     /**

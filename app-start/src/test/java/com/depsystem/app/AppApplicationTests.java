@@ -15,6 +15,7 @@ import com.depsystem.app.systemServer.util.JwtUtil;
 import com.depsystem.app.systemServer.util.RedisUtil;
 import com.depsystem.app.systemServer.util.ResultConvert;
 import io.jsonwebtoken.Claims;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -138,6 +139,8 @@ class AppApplicationTests {
 
     @Autowired
     CacheUtil cacheUtil;
+    @Resource
+    RedisUtil redisUtil;
 
     @Test
     void TestRedis(){
@@ -147,10 +150,13 @@ class AppApplicationTests {
         String s = test.toString();
         System.out.println(s);
         System.out.println("***************************************************");
-        RedisUtil redisUtil = new RedisUtil();
-        redisUtil.expire("a",60);
+//        RedisUtil redisUtil = new RedisUtil();
+//        redisUtil.expire("a",90);
 //        long a = redisUtil.getExpire("a");
 //        System.out.println(a);
+        redisUtil.set("ss","ssss",4);
+        Object ss = redisUtil.get("ss");
+        System.out.println(ss.toString());
     }
 
 }

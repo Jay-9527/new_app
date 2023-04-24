@@ -7,10 +7,7 @@
 
 package com.depsystem.app.systemServer.util;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import io.jsonwebtoken.*;
 
@@ -92,9 +89,9 @@ public class JwtUtil {
      * @param token token
      * @return username
      */
-    public static List<String> getPathFromToken(String token) {
+    public static ArrayList<String> getPathFromToken(String token) {
         Claims claims = parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-        return Collections.singletonList(claims.get("path", String.class));
+        return (ArrayList<String>) Collections.singletonList(claims.get("path", String.class));
     }
 
 }

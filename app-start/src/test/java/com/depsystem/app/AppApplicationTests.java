@@ -149,8 +149,8 @@ class AppApplicationTests {
         System.out.println("***************************************************");
         RedisUtil redisUtil = new RedisUtil();
         redisUtil.expire("a",60);
-        long a = redisUtil.getExpire("a");
-        System.out.println(a);
+//        long a = redisUtil.getExpire("a");
+//        System.out.println(a);
     }
 
 }

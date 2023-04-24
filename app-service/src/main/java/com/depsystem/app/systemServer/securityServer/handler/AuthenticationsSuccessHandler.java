@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import java.io.IOException;
@@ -27,6 +28,10 @@ import java.util.Map;
  * @author adiao
  */
 public class AuthenticationsSuccessHandler implements AuthenticationSuccessHandler {
+
+    @Autowired
+    RedisUtil redisUtil;
+
     /**
      * @param request 请求
      * @param response 响应
@@ -52,7 +57,6 @@ public class AuthenticationsSuccessHandler implements AuthenticationSuccessHandl
         userinfo.put("name",principal.getUsername());
         userinfo.put("role",principal.getRoles());
         userinfo.put("path",principal.getPath().toString());
-        RedisUtil redisUtil = new RedisUtil();
         redisUtil.set("userinfo:",userinfo);
 
         response.setCharacterEncoding("utf-8");

@@ -10,12 +10,15 @@ import com.depsystem.app.loginServer.Login;
 import com.depsystem.app.loginServer.LoginDAO;
 import com.depsystem.app.loginServer.LoginMapper;
 import com.depsystem.app.systemServer.securityServer.entity.MyUserDetails;
+import com.depsystem.app.systemServer.util.CacheUtil;
 import com.depsystem.app.systemServer.util.JwtUtil;
+import com.depsystem.app.systemServer.util.RedisUtil;
 import com.depsystem.app.systemServer.util.ResultConvert;
 import io.jsonwebtoken.Claims;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,13 +52,7 @@ class AppApplicationTests {
         String role = loginMapper.getRole("683697414");
         System.out.println(role);
 
-
-
         List<Map<String, Object>> userPermissions = loginMapper.getUserPermissions("683697414");
-        //Integer[] permission = (Integer[]) userPermission.get("permissionId");
-        //String permission2 = userPermission.get("permission").toString();
-        //System.out.println(Arrays.toString(permission));
-        //System.out.println(permission2);
         List<Map<String, Object>> resultList = new ArrayList<>();
         for (Map<String, Object> permission : userPermissions) {
             Map<String, Object> map = new HashMap<>();
@@ -92,11 +89,9 @@ class AppApplicationTests {
             name=683697414}
             */
 
-        /**
+        /*
          * 测试ResultConvert
          */
-        //ResultConvert convert = new ResultConvert();
-
 
         String input = entries.get("urls").toString();
         List<String> paths = new ArrayList<>();
@@ -138,6 +133,24 @@ class AppApplicationTests {
         System.out.println(payloads);
         System.out.println("**************************************");
 
+    }
+
+
+    @Autowired
+    CacheUtil cacheUtil;
+
+    @Test
+    void TestRedis(){
+        /* 测试Redis 工具类是否可用。 */
+        cacheUtil.set("test","adiao");
+        Object test = cacheUtil.get("test");
+        String s = test.toString();
+        System.out.println(s);
+        System.out.println("***************************************************");
+        RedisUtil redisUtil = new RedisUtil();
+        redisUtil.expire("a",60);
+        long a = redisUtil.getExpire("a");
+        System.out.println(a);
     }
 
 }

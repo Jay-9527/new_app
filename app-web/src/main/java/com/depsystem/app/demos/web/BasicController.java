@@ -23,6 +23,7 @@ import com.depsystem.app.systemServer.util.RedisUtil;
 import com.depsystem.app.systemServer.util.ResponseResult;
 import com.wf.captcha.SpecCaptcha;
 import jakarta.annotation.Resource;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

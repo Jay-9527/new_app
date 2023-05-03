@@ -34,7 +34,7 @@ public class ETLUtil {
      * @param arrayObj String 字符串
      * @return List object
      */
-    private static List<String> parseArrayToList(Object arrayObj) {
+    public static List<String> parseArrayToList(Object arrayObj) {
         List<String> itemList = new ArrayList<>();
         if (arrayObj instanceof String) {
             itemList.add((String) arrayObj);

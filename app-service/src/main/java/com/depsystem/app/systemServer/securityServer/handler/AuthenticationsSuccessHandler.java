@@ -8,16 +8,19 @@
 package com.depsystem.app.systemServer.securityServer.handler;
 
 import com.depsystem.app.systemServer.securityServer.entity.MyUserDetails;
+import com.depsystem.app.systemServer.securityServer.securityFilter.MyUsernamePasswordAuthenticationSaveFilter;
 import com.depsystem.app.systemServer.util.JwtUtil;
 import com.depsystem.app.systemServer.util.ResponseResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import java.io.IOException;
-
 
 
 /**
@@ -25,6 +28,9 @@ import java.io.IOException;
  * @author adiao
  */
 public class AuthenticationsSuccessHandler implements AuthenticationSuccessHandler {
+    @Resource
+    @Qualifier("myRedisTemplate")
+    RedisTemplate<String,Object> redisTemplate;
     /**
      * @param request 请求
      * @param response 响应
@@ -44,10 +50,11 @@ public class AuthenticationsSuccessHandler implements AuthenticationSuccessHandl
         *   token: 存放生成好的token
         *  } */
         MyUserDetails principal = (MyUserDetails) authentication.getPrincipal();
+        MyUsernamePasswordAuthenticationSaveFilter saveFilter = new MyUsernamePasswordAuthenticationSaveFilter();
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json;charset=utf-8");
-        String s = new ObjectMapper().writeValueAsString(ResponseResult.ok(200,"登录成功",authentication.getPrincipal(),
-                JwtUtil.generateToken(principal.getUsername(),principal.getRoles(), principal.getPermissions().toString())));
+        String s = new ObjectMapper().writeValueAsString(ResponseResult.ok(200,"登录成功",principal.getPath(),
+                JwtUtil.generateToken(principal)));
         response.getWriter().write(s);
     }
 }

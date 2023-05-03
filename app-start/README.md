@@ -55,3 +55,43 @@ roles ： 是通过后台查询并封装到response中。
 在本项目中。
 
 所访问的路径需要动态一下。
+
+所以，我们这边要对用户所访问的路径进行设计一下。
+
+路径格式：
+
+```
+/index/[menu_item] >>>> 系统管理员角色的界面路径
+/用户名/[menu_item] >>>> 用户所对应角色的界面路径
+```
+然后呢，对应的操作权限我们通过注解的方式添加到controller的API方法中。
+来实现操作权限的限制。
+
+与此同时，将token返回放到登录成功信息的响应体中。而controller则是返回用户信息。
+
+经过查询源码和查阅相关的security6.0的教程视频发现。很多开发者都是将数据库所查到信息存到User Detail
+中。然后丢给框架来存储认证好的信息到SecurityContextHold中。
+随后再将用户信息存到redis缓存中，然后后面验证时只需要从Redis中获取所存放的用户信息出来验证就行了。 
+并不需要再从请求中获取。
+
+逻辑：
+
+从controller中获取用户账号、密码。传递到service中。再service实现类中将所传递的信息封装到Username Password Token对象中。
+并存到AuthenticationManager中。将用户信息返回。
+
+随后Security 框架会从AuthenticationManager 中获取所存的用户名和密码。进行查询和验证。【所查询的操作是再User Detail ServiceImpl类中
+实现，然后将查到的信息存到Redis中。】
+
+##### JWT 验证
+
+这个验证就是先从Redis中获取所存放的token。并将存放的token进行解码获取信息。判断是否正确。是就直接放行请求。
+但再权限认证过程中，我们需要将存放到token的权限信息提取出来。然后判断。前提是在请求后访问操作时，我们要对其权限
+拦截，通过拦截器。
+
+---
+
+原理学习地址:
+
+[Spring Security 6.x\_云烟成雨TD的博客-CSDN博客](https://blog.csdn.net/qq_43437874/category_12259144.html)
+
+[Spring Security 官网](https://spring.io/projects/spring-security[](https://www.bing.com/search?q=spring+security+&qs=n&form=QBRE&sp=-1&lq=0&pq=&sc=0-0&sk=&cvid=DA7F551E132D44F4929E186022FA945B&ghsh=0&ghacc=0&ghpl=&mkt=zh-CN#))

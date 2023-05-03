@@ -7,40 +7,44 @@
 
 package com.depsystem.app.loginServer;
 
-import cn.hutool.json.JSONUtil;
 import jakarta.annotation.Resource;
+import org.springframework.security.authentication.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 
+/**
+ * 这里是用于将查询到的用户封装到UserDetails中并返回。
+ * */
 @Service
 public class LoginServerImpl implements LoginServer {
     @Resource
-    LoginMapper userMapper;
+    LoginMapper usermapper;
 
-    /** 登录
-     * @param name     用户名
-     * @param password 密码
-     * @return vo
-     */
+    @Resource
+    AuthenticationManager authenticationsManager;
+
     @Override
     public Login login(String name, String password) {
-        LoginDAO userByNameAndPassword = userMapper.findUserByNameAndPassword(name, password);
-        Login vo =new Login();
-        if (JSONUtil.isNull(userByNameAndPassword)){
-            vo.setName(userByNameAndPassword.getName());
-            vo.setPassword(userByNameAndPassword.getPassword());
-        }else {
-            System.out.println("登录失败");
+        /* 检查用户的账号 */
+        if (ObjectUtils.isEmpty(name)) {
+            throw new UsernameNotFoundException("用户不能为空");
         }
+
+        if (ObjectUtils.isEmpty(password)) {
+            throw new UsernameNotFoundException("用户密码不能为空");
+        }
+        Login vo = new Login();
+        vo.setName(name);
+        vo.setPassword(password);
+        /* 将前端所传递的用户信息存到AuthenticationManager中。 */
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(name,password);
+        Authentication authentication = authenticationsManager.authenticate(authenticationToken);
+
         return vo;
     }
 
-    /** 注测
-     * @param login VO
-     * @return vo
-     */
-    @Override
-    public Login register(Login login) {
-        return null;
-    }
+
 }

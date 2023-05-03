@@ -1,10 +1,3 @@
-/**
- * @author JOJO
- * @class AuthenticationServerImpl
- * @date 2023/4/21
- * @apiNote
- */
-
 package com.depsystem.app.systemServer.securityServer.securityFilter;
 
 import cn.hutool.json.JSONObject;
@@ -15,32 +8,20 @@ import com.depsystem.app.loginServer.LoginMapper;
 import com.depsystem.app.systemServer.securityServer.entity.MyUserDetails;
 import com.depsystem.app.systemServer.util.ResultConvert;
 import jakarta.annotation.Resource;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-
-/**
- * 认证服务
- * 用户认证用户的账号密码是否正确。
- * 并同时检查用户可访问的路径。
- * 以及用户对路径下的权限。
- * 这里实现查询和封装authentication。
- * 完成
- * 这里实现用户封装
- * @author adiao
- */
 @Service
-public class AuthenticationServerImpl implements UserDetailsService {
+public class UserDetailServiceImpl implements UserDetailsService {
     @Resource
     LoginMapper usermapper;
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         /* 检查用户的账号 */
@@ -48,20 +29,16 @@ public class AuthenticationServerImpl implements UserDetailsService {
             throw new UsernameNotFoundException("用户不能为空");
         }
         /* 封装用户信息 */
-        Login loginVO = buildLoginVO(username);
         List<String> paths = getPath(username);
         String roles = getRole(username);
-        return new MyUserDetails(loginVO,roles,paths);
+        Login loginVO = buildLoginVO(username);
+        return new MyUserDetails(loginVO, roles, paths);
     }
 
     private Login buildLoginVO(String name){
         LoginDAO userByName = usermapper.findUserByName(name);
         ResultConvert convert = new ResultConvert();
         return convert.map(userByName, Login.class);
-    }
-
-    private String getPermission(String name){
-        return null;
     }
 
     /**
@@ -85,5 +62,4 @@ public class AuthenticationServerImpl implements UserDetailsService {
     private String getRole(String name){
         return usermapper.getRole(name);
     }
-
 }

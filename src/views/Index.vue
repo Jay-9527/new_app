@@ -74,8 +74,7 @@ export default {
     },
     // 初始化
     created() {
-        const message = store.state.showLoginSuccess.valueOf()
-        this.$data.message = message
+
     },
 
     mounted() {
@@ -127,7 +126,7 @@ export default {
 }
 
 /* content样式 */
-.content{
+.content {
     max-width: 100%;
     max-height: 100vh;
 }

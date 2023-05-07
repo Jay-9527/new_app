@@ -1,5 +1,16 @@
 <script setup>
-import { computed } from 'vue';
+import { provide } from 'vue'
+import store from './utils/vuex/store';
+provide('store', store)
+
+// 这样的写法是支持的。同时也是定义一个生命周期。
+// created: {
+//   console.log("创建完了。")
+//   console.log(store)
+// }
+
+
+
 </script>
 
 <template>

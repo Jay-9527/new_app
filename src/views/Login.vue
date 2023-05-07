@@ -17,9 +17,10 @@
                                     id="exampleInputPassword1" placeholder="请输入密码">
                             </div>
                             <div class="image">
-                                <img :src="this.codeImage" @click="getCode" style="width: 130px; height: 39px;" data-base64="" alt="image">
+                                <img :src="image" @click="getCode" style="width: 130px; height: 39px;" data-base64=""
+                                    alt="image">
                                 <input type="text" id="imginput" style="width: 120px;" class="form-control"
-                                    placeholder="输入验证码" />
+                                    placeholder="输入验证码" v-model="codeImage" />
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -38,10 +39,15 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex"
 import request from "../utils/axios/request"
 import qs from "qs"
-// import { useStore } from 'vuex';
-import store from "../utils/vuex/store"
+// qs.parse({
+//     username: this.$data.username,
+//     password: this.$data.password,
+//     imgData: this.$data.imgcode
+// })
+import { inject } from 'vue';
 
 export default {
     data() {
@@ -51,35 +57,52 @@ export default {
             codeImage: ''
         }
     },
+    computed: {
+        ...mapState('user', ['image']),
+        store() {
+            var store = inject("store")
+        }
+    },
     created() {
-      const img = this.$data.codeImage;
-      request.get('/captcha').then((response) => {
-            this.codeImage = response.data.data.base64
+        request.get('/captcha').then((response) => {
+            // 初始化验证码
+            this.initd(response.data.data.base64)
         })
     },
     methods: {
+        ...mapMutations('user', ['setimage', 'setname', 'setpath', 'settoken']),
+        initd(value) {
+            this.setimage(value)
+        },
         login() {
             request.post('api/login',
                 qs.parse({
                     username: this.$data.username,
-                    password: this.$data.password
-                }), {
-                headers: {
-                    'Content-Type': ' application/x-www-form-urlencoded'
-                }
-            }).then(resp => {
-                // 打印当前请求的对象和响应信息
-                console.log(resp)
-                if (resp.data.code === 200) {
-                    console.log(resp.data.msg)
-                    this.$router.push({ name: 'index' })
-                }
+                    password: this.$data.password,
+                    imgData: this.$data.codeImage
+                })
+                , {
+                    headers: {
+                        'Content-Type': ' application/x-www-form-urlencoded'
+                    }
+                }).then(resp => {
+                    // 判断状态
+                    console.log(resp)
+                    if (resp.data.code === 200) {
+                        this.setname(resp.data.token)
+                        this.setpath(resp.data.data)
+                        this.settoken(resp.data.token)
 
-            }).catch(error => console.log(error))
+                        // 动态路由到用户菜单栏中。
+
+                        this.$router.push({ name: 'Home' })
+                    }
+
+                }).catch(error => console.log(error))
         },
         getCode() {
             request.get('/captcha').then((response) => {
-                this.codeImage = response.data.data.base64
+                this.setimage(response.data.data.base64)
             })
         },
         toRegister() {
@@ -140,6 +163,6 @@ export default {
 }
 
 #imginput {
-    margin: 0 12px;
+    margin: 0 0 0 12px;
 }
 </style>

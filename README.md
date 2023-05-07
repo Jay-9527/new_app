@@ -88,5 +88,7 @@ npm run dev
 这里的效果是先请求，获取数据将数据存到Store中，让守卫根据Store来动态添加路径到menu中。[token]是后端返回存到本地的数据。
 
 // setup(props, context) 这是setup函数所要传入的参数。
+
 /// 操作对象。
+
 // reactive 是和Ref一样的函数。可传递参数和对象。是引用型实例。
